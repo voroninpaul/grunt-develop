@@ -6,6 +6,7 @@
 ## Notes:
 
   * Requires Grunt >= 0.4.0
+  * Uses it's own internal "watch", no need to list in `grunt-contrib-watch` as a target
   * No need to modify/export your server or alter your applications code.**
 
 ## Install
@@ -30,8 +31,7 @@ module.exports = function(grunt) {
 
   grunt.loadNpmTasks('grunt-develop');
 
-  // if you are also using "watch", place after
-  grunt.registerTask('default', ['develop','watch']);
+  grunt.registerTask('default', ['develop']);
 
 };
 
