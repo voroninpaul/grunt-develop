@@ -5,7 +5,8 @@
   "homepage": "https://github.com/edwardhotchkiss/grunt-develop",
   "author": { "name": "Edward Hotchkiss", "email": "edwardhotchkiss@me.com" },
   "contributors": [
-    { "name": "Edward Hotchkiss","email": "edwardhotchkiss@me.com" }
+    { "name": "Edward Hotchkiss","email": "edwardhotchkiss@me.com" },
+    { "name": "Oliver Joseph Ash","email": "oliverjash@icloud.com" }
   ],
   "repository":{
     "type":"git",
