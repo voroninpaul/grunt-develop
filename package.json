@@ -1,7 +1,7 @@
 {
   "name": "grunt-develop",
   "description": "Grunt Task to run a Node.js Server while developing, auto-reloading on change.",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "homepage": "https://github.com/edwardhotchkiss/grunt-develop",
   "author": { "name": "Edward Hotchkiss", "email": "edwardhotchkiss@me.com" },
   "contributors": [
