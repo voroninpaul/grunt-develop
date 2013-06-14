@@ -71,6 +71,15 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-nodeunit');
 
+  grunt.registerTask('looptest', 'Reload the app periodically.', function() {
+    var callback = this.async();
+    grunt.log.writeln('Waiting...');
+    setTimeout(function() {
+      grunt.task.run('develop', 'looptest');
+      callback();
+    }, 2000);
+  });
+
   // default = run jslint and all tests
   grunt.registerTask('default', ['jshint','develop','nodeunit']);
 
