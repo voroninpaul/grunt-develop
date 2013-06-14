@@ -18,18 +18,19 @@ module.exports = function(grunt) {
     , util = require('util')
     , child_process = require('child_process');
 
-  var exited = true;
+  var exited = true
+    , restarting = false;
 
   // kill child process (server)
   grunt.event.on('develop.kill', function(filename) {
-    grunt.log.warn('\nkill process');
+    grunt.log.warn('kill process');
     child.kill('SIGHUP');
   });
 
   // watches server and broadcasts restart on change
   grunt.event.on('develop.watch', function(filename) {
     fs.watchFile(filename, { interval: 250 }, function(change) {
-      grunt.log.warn('\nfile changed');
+      grunt.log.warn('file changed');
       grunt.event.emit('develop.kill');
     });
   });
@@ -37,10 +38,16 @@ module.exports = function(grunt) {
   // starts server
   grunt.event.on('develop.start', function(filename) {
     if (!exited) {
+      restarting = true;
       return grunt.event.emit('develop.kill', filename);
     }
-    child = child_process.spawn(process.argv[0], [filename], {
-      stdio: 'inherit'
+    child = grunt.util.spawn({
+      cmd: process.argv[0],
+      args: [filename],
+      opts: {
+        stdio: 'inherit',
+      }
+    }, function(error, result, code) {
     });
     exited = false;
     grunt.log.ok(util.format('started application "%s".', filename));
@@ -49,8 +56,9 @@ module.exports = function(grunt) {
       if (signal !== null) {
         grunt.log.warn(util.format('application exited with signal %s',
           signal));
-        if (signal === 'SIGHUP') {
+        if (restarting) {
           grunt.event.emit('develop.start', filename);
+          restarting = false;
         }
         return;
       }
@@ -69,6 +77,12 @@ module.exports = function(grunt) {
     done = this.async();
     grunt.event.emit('develop.start', filename);
     done();
+  });
+
+  process.on("exit", function() {
+    if (!exited) {
+      child.kill('SIGINT');
+    }
   });
 
 };
