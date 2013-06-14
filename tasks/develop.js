@@ -42,15 +42,16 @@ module.exports = function(grunt) {
     child = child_process.spawn(process.argv[0], [filename], {
       stdio: 'inherit'
     });
-    exited = false
+    exited = false;
     grunt.log.ok(util.format('started application "%s".', filename));
     child.on('exit', function(code, signal) {
       exited = true;
       if (signal !== null) {
         grunt.log.warn(util.format('application exited with signal %s',
           signal));
-        if (signal === 'SIGHUP')
+        if (signal === 'SIGHUP') {
           grunt.event.emit('develop.start', filename);
+        }
         return;
       }
       grunt.log.warn(util.format('application exited with code %s', code));

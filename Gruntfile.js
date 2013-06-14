@@ -35,8 +35,7 @@ module.exports = function(grunt) {
         "undef": true,
         "boss": true,
         "eqnull": true,
-        "node": true,
-        "es5": true
+        "node": true
       }
     },
     // grunt-develop
