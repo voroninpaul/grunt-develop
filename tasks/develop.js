@@ -17,42 +17,51 @@ module.exports = function(grunt) {
     , fs = require('fs')
     , util = require('util');
 
+  var exited = true
+    , restarting = false;
+
   // kills child process (server)
   grunt.event.on('develop.kill', function() {
-    grunt.log.warn('\nrestarting server');
+    grunt.log.warn('kill process');
     child.kill('SIGHUP');
   });
 
   // watches server and broadcasts restart on change
   grunt.event.on('develop.watch', function(filename) {
     fs.watchFile(filename, { interval: 250 }, function(change) {
-      grunt.log.warn('\nfile changed');
+      grunt.log.warn('file changed');
       grunt.event.emit('develop.kill');
     });
   });
 
   // starts server
   grunt.event.on('develop.start', function(filename) {
-    if (child && !child.killed) {
+    if (!exited) {
+      restarting = true;
       return grunt.event.emit('develop.kill');
     }
     child = grunt.util.spawn({
       cmd: process.argv[0],
-      args: [filename]
-    }, function (error, result, code) {
-      grunt.event.emit('develop.start', filename);
+      args: [filename],
+      opts: {
+        stdio: 'inherit',
+      }
+    }, function(error, result, code) {
     });
-    grunt.log.ok(util.format('succesfully started server "%s".', filename));
-    child.stdout.setEncoding('utf8');
-    child.stderr.setEncoding('utf8');
-    child.stdout.on('data', function(data) {
-      grunt.log.write(data);
-    });
-    child.stderr.on('data', function(data) {
-      grunt.log.write(data);
-    });
+    exited = false;
+    grunt.log.ok(util.format('started application "%s".', filename));
     child.on('exit', function(code, signal) {
-      grunt.log.warn(util.format('server exited with: "%s"', signal));
+      exited = true;
+      if (signal !== null) {
+        grunt.log.warn(util.format('application exited with signal %s',
+                                   signal));
+      } else {
+        grunt.log.warn(util.format('application exited with code %s', code));
+      }
+      if (restarting) {
+        grunt.event.emit('develop.start', filename);
+        restarting = false;
+      }
     });
     grunt.event.emit('develop.watch', filename);
   });
@@ -61,12 +70,18 @@ module.exports = function(grunt) {
   grunt.registerMultiTask('develop', 'init', function() {
     var done, filename = this.data.file;
     if (!grunt.file.exists(filename)) {
-      grunt.fail.warn(util.format('server file "%s" not found!', filename));
+      grunt.fail.warn(util.format('application file "%s" not found!', filename));
       return false;
     }
     done = this.async();
     grunt.event.emit('develop.start', filename);
     done();
+  });
+
+  process.on("exit", function() {
+    if (!exited) {
+      child.kill('SIGINT');
+    }
   });
 
 };
