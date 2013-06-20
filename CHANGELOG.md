@@ -1,7 +1,15 @@
 
+0.0.4 / 2013-06-20 
+==================
+
+ * [minor] style
+ * Merge pull request #7 from cbayram/master
+ * Added optional "nodeArgs" and application "args" options to pass arguments to node and application server script respectively
+
 0.0.3 / 2013-06-15 
 ==================
 
+ * [changelog] updated. many thanks to @undashes for fixing a possible leak, better linting, and proper handling of non-kill exits, etc :)
  * Merge pull request #6 from benbria/reload-on-error
  * Clean the code and add a looptest task.
  * Update package.json.
