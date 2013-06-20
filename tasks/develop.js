@@ -1,10 +1,10 @@
-/*!
+
+/**
  *
- * grunt-develop
- * http://github.com/edwardhotchkiss/grunt-develop
- *
- * Copyright (c) 2013 Edward Hotchkiss
- * Licensed under the MIT license.
+ * @module grunt-develop
+ * @author Edward Hotchkiss <edwardhotchkiss@me.com>
+ * @description http://github.com/edwardhotchkiss/grunt-develop
+ * @license MIT
  *
  */
 
@@ -13,10 +13,9 @@
 module.exports = function(grunt) {
 
   var child
+    , running = false
     , fs = require('fs')
     , util = require('util');
-
-  var running = false;
 
   // kills child process (server)
   grunt.event.on('develop.kill', function() {
@@ -44,6 +43,7 @@ module.exports = function(grunt) {
         stdio: 'inherit'
       }
     }, function(error, result, code) {
+      /* ---- */
     });
     running = true;
     grunt.log.ok(util.format('started application "%s".', filename));
@@ -55,7 +55,7 @@ module.exports = function(grunt) {
       } else {
         grunt.log.warn(util.format('application exited with code %s', code));
       }
-      if('SIGHUP' === signal ) {
+      if ('SIGHUP' === signal ) {
         grunt.event.emit('develop.start', filename, nodeArgs, args);
       }
     });
@@ -74,7 +74,7 @@ module.exports = function(grunt) {
     done();
   });
 
-  process.on("exit", function() {
+  process.on('exit', function() {
     if (running) {
       child.kill('SIGINT');
     }

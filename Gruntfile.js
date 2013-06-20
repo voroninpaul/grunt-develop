@@ -1,5 +1,5 @@
 
-/*!
+/**
  *
  * grunt-develop
  * http://github.com/edwardhotchkiss/node-develop
