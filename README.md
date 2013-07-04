@@ -58,7 +58,7 @@ module.exports = function(grunt) {
           'lib/*.js'
         ],
         tasks: ['develop'],
-        options: {nospawn: true}
+        options: { nospawn: true }
       }
     },
     develop: {
