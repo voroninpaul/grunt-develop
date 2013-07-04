@@ -1,4 +1,13 @@
 
+0.1.0 / 2013-07-04 
+==================
+
+ * [minor] bracket ocd
+ * Merge pull request #8 from benbria/no-watch
+ * Update package.json, bumping up the version.
+ * Update the readme with watch changes.
+ * Remove watch (duplicates grunt-contrib-watch feature).
+
 0.0.4 / 2013-06-20 
 ==================
 
