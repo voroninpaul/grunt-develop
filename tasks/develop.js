@@ -38,6 +38,7 @@ module.exports = function(grunt) {
       /* ---- */
     });
     running = true;
+    grunt.event.emit('develop.started');
     grunt.log.ok(util.format('started application "%s".', filename));
     child.on('exit', function(code, signal) {
       running = false;
