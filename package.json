@@ -1,7 +1,7 @@
 {
   "name": "grunt-develop",
   "description": "Run a Node.js application for development, with support for auto-reload.",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "homepage": "https://github.com/edwardhotchkiss/grunt-develop",
   "author": { "name": "Edward Hotchkiss", "email": "edwardhotchkiss@me.com" },
   "contributors": [

@@ -1,4 +1,11 @@
 
+0.1.1 / 2013-07-13 
+==================
+
+ * [comments] jsdoc style
+ * Merge pull request #9 from nategood/master
+ * emit a "develop.started" event when the server restarts
+
 0.1.0 / 2013-07-04 
 ==================
 
