@@ -1,11 +1,12 @@
 
 /**
  *
- * grunt-develop
- * http://github.com/edwardhotchkiss/node-develop
- *
- * Copyright (c) 2013 Edward Hotchkiss
- * Licensed under the MIT license.
+ * @name grunt-develop
+ * @author Edward Hotchkiss <edwardhotchkiss@me.com>
+ * @url http://github.com/edwardhotchkiss/node-develop
+ * @description Grunt Task to run a Node.js Server while developing, auto-reloading on change.
+ * @copyright Copyright (c) 2013 Edward Hotchkiss
+ * @license MIT
  *
  */
 
