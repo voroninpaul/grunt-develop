@@ -42,6 +42,26 @@ module.exports = function(grunt) {
 };
 ```
 
+## Coffeescript App Example
+
+You may also have develop automatically restart coffeescript based node
+applications by using the `cmd` option.  This option allows the user to
+specify which command/executable to use when restarting the server.
+
+```coffeescript
+module.exports = (grunt) ->
+
+  grunt.initConfig
+    develop:
+      server:
+        file: 'app.coffee'
+        cmd: 'coffee'
+
+  grunt.loadNpmTasks 'grunt-develop'
+
+  grunt.registerTask 'default', ['develop']
+```
+
 ## A more complex Gruntfile.js
 
  To support auto-reload on changes, for example:
