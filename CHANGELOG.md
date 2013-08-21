@@ -1,4 +1,17 @@
 
+0.2.0 / 2013-08-20 
+==================
+
+ * [dist] bump to 0.2.0
+ * Merge pull request #12 from nategood/cmd-option
+ * Merge branch 'cmd-option' of github.com:nategood/grunt-develop into cmd-option
+ * Adds the cmd option
+ * emit filename, nodeArgs, and args with develop.started
+ * Merge branch 'master' into cmd-option
+ * Merge remote-tracking branch 'edwardhotchkiss/master'
+ * Adds the cmd option
+ * emit filename, nodeArgs, and args with develop.started
+
 0.1.1 / 2013-07-13 
 ==================
 
