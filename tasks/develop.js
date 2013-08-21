@@ -24,12 +24,12 @@ module.exports = function(grunt) {
   });
 
   // starts server
-  grunt.event.on('develop.start', function(filename, nodeArgs, args) {
+  grunt.event.on('develop.start', function(filename, nodeArgs, args, cmd) {
     if (running) {
       return grunt.event.emit('develop.kill');
     }
     child = grunt.util.spawn({
-      cmd: process.argv[0],
+      cmd: cmd,
       args: nodeArgs.concat([filename], args),
       opts: {
         stdio: 'inherit'
@@ -49,20 +49,24 @@ module.exports = function(grunt) {
         grunt.log.warn(util.format('application exited with code %s', code));
       }
       if ('SIGHUP' === signal ) {
-        grunt.event.emit('develop.start', filename, nodeArgs, args);
+        grunt.event.emit('develop.start', filename, nodeArgs, args, cmd);
       }
     });
   });
 
   // TASK. perform setup
   grunt.registerMultiTask('develop', 'init', function() {
-    var done, filename = this.data.file, nodeArgs = this.data.nodeArgs || [], args = this.data.args || [];
+    var done
+      , filename = this.data.file
+      , nodeArgs = this.data.nodeArgs || []
+      , args = this.data.args || []
+      , cmd = this.data.cmd || process.argv[0];
     if (!grunt.file.exists(filename)) {
       grunt.fail.warn(util.format('application file "%s" not found!', filename));
       return false;
     }
     done = this.async();
-    grunt.event.emit('develop.start', filename, nodeArgs, args);
+    grunt.event.emit('develop.start', filename, nodeArgs, args, cmd);
     done();
   });
 
