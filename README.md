@@ -31,6 +31,7 @@ module.exports = function(grunt) {
         file: 'app.js',
         nodeArgs: ['--debug'],            // optional
         args: ['appArg1', 'appArg2']      // optional
+        env: { NODE_ENV: 'development'}      // optional
       }
     }
   });

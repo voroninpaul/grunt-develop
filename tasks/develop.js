@@ -24,7 +24,7 @@ module.exports = function(grunt) {
   });
 
   // starts server
-  grunt.event.on('develop.start', function(filename, nodeArgs, args, cmd) {
+  grunt.event.on('develop.start', function(filename, nodeArgs, args, env, cmd) {
     if (running) {
       return grunt.event.emit('develop.kill');
     }
@@ -32,7 +32,8 @@ module.exports = function(grunt) {
       cmd: cmd,
       args: nodeArgs.concat([filename], args),
       opts: {
-        stdio: 'inherit'
+        stdio: 'inherit',
+        env: env
       }
     }, function(error, result, code) {
       /* ---- */
@@ -49,7 +50,7 @@ module.exports = function(grunt) {
         grunt.log.warn(util.format('application exited with code %s', code));
       }
       if ('SIGHUP' === signal ) {
-        grunt.event.emit('develop.start', filename, nodeArgs, args, cmd);
+        grunt.event.emit('develop.start', filename, nodeArgs, args, env, cmd);
       }
     });
   });
@@ -60,13 +61,14 @@ module.exports = function(grunt) {
       , filename = this.data.file
       , nodeArgs = this.data.nodeArgs || []
       , args = this.data.args || []
+      , env = this.data.env || {}
       , cmd = this.data.cmd || process.argv[0];
     if (!grunt.file.exists(filename)) {
       grunt.fail.warn(util.format('application file "%s" not found!', filename));
       return false;
     }
     done = this.async();
-    grunt.event.emit('develop.start', filename, nodeArgs, args, cmd);
+    grunt.event.emit('develop.start', filename, nodeArgs, args, env, cmd);
     done();
   });
 
