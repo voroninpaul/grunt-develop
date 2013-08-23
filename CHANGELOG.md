@@ -1,4 +1,11 @@
 
+0.2.1 / 2013-08-22 
+==================
+
+ * [contrib] added @adamwdraper
+ * Merge pull request #13 from sheknows/master
+ * add environment option
+
 0.2.0 / 2013-08-20 
 ==================
 
