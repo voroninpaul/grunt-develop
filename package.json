@@ -8,7 +8,8 @@
     { "name": "Edward Hotchkiss","email": "edwardhotchkiss@me.com" },
     { "name": "Oliver Joseph Ash","email": "oliverjash@icloud.com" },
     { "name": "Jean Lauliac","email": "jean@lauliac.com" },
-    { "name": "Cagdas Bayram","email": "cagdasb@gmail.com" }
+    { "name": "Cagdas Bayram","email": "cagdasb@gmail.com" },
+    { "name": "Adam Draper","email": "https://github.com/adamwdraper" },
   ],
   "repository":{
     "type":"git",
