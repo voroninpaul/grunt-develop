@@ -119,3 +119,7 @@ Copyright (c) 2013, Edward Hotchkiss.
 ## Author: [Edward Hotchkiss][0]
 
 [0]: http://github.com/edwardhotchkiss/
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/edwardhotchkiss/grunt-develop/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
