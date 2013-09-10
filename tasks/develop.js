@@ -61,7 +61,7 @@ module.exports = function(grunt) {
       , filename = this.data.file
       , nodeArgs = this.data.nodeArgs || []
       , args = this.data.args || []
-      , env = this.data.env || {}
+      , env = this.data.env || process.env || {}
       , cmd = this.data.cmd || process.argv[0];
     if (!grunt.file.exists(filename)) {
       grunt.fail.warn(util.format('application file "%s" not found!', filename));
