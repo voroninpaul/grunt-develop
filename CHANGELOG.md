@@ -1,4 +1,12 @@
 
+0.2.2 / 2013-09-10 
+==================
+
+ * Merge pull request #15 from shanestillwell/master
+ * Fall back to process.env
+ * Merge pull request #14 from bitdeli-chef/master
+ * Add a Bitdeli badge to README
+
 0.2.1 / 2013-08-22 
 ==================
 
