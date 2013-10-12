@@ -1,11 +1,9 @@
 
 /**
- *
  * @module grunt-develop
- * @author Edward Hotchkiss <edwardhotchkiss@me.com>
- * @description http://github.com/edwardhotchkiss/grunt-develop
+ * @author Edward Hotchkiss <edward@edwardhotchkiss.com>
+ * @description http://github.com/edwardhotchkiss/grunt-develop/
  * @license MIT
- *
  */
 
 'use strict';
@@ -23,36 +21,46 @@ module.exports = function(grunt) {
     child.kill('SIGHUP');
   });
 
+  // spawned, notify grunt to move onto next task
+  grunt.event.on('develop.started', function(done) {
+    setTimeout(function() {
+      done();
+    }, 250);
+  });
+
   // starts server
-  grunt.event.on('develop.start', function(filename, nodeArgs, args, env, cmd) {
+  grunt.event.on('develop.start', function(filename, nodeArgs, args, env, cmd, done) {
+    var args = nodeArgs.concat([filename], args);
     if (running) {
       return grunt.event.emit('develop.kill');
     }
     child = grunt.util.spawn({
       cmd: cmd,
-      args: nodeArgs.concat([filename], args),
+      args: args,
       opts: {
-        stdio: 'inherit',
         env: env
       }
     }, function(error, result, code) {
-      /* ---- */
-    });
-    running = true;
-    grunt.event.emit('develop.started');
-    grunt.log.ok(util.format('started application "%s".', filename));
-    child.on('exit', function(code, signal) {
+      /* ------ */
+    })
+    // handle exit
+    .on('exit', function(code, signal) {
       running = false;
       if (signal !== null) {
-        grunt.log.warn(util.format('application exited with signal %s',
-          signal));
+        grunt.log.warn(util.format('application exited with signal %s', signal));
       } else {
         grunt.log.warn(util.format('application exited with code %s', code));
       }
-      if ('SIGHUP' === signal ) {
+      if (signal === 'SIGHUP') {
         grunt.event.emit('develop.start', filename, nodeArgs, args, env, cmd);
       }
+    })
+    .stdout.on('data', function(buffer) {
+      grunt.log.write('\r\n[grunt-develop] > '.cyan + String(buffer));
     });
+    running = true;
+    grunt.log.write('\r\n[grunt-develop] > '.cyan + util.format('started application "%s".', filename));
+    grunt.event.emit('develop.started', done);
   });
 
   // TASK. perform setup
@@ -68,8 +76,7 @@ module.exports = function(grunt) {
       return false;
     }
     done = this.async();
-    grunt.event.emit('develop.start', filename, nodeArgs, args, env, cmd);
-    done();
+    grunt.event.emit('develop.start', filename, nodeArgs, args, env, cmd, done);
   });
 
   process.on('exit', function() {

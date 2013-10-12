@@ -13,20 +13,21 @@
   ],
   "repository":{
     "type":"git",
-    "url":"git://github.com/edwardhotchkiss/node-develop.git"
+    "url":"git://github.com/edwardhotchkiss/grunt-develop.git"
   },
   "engines": {
-    "node": ">= 0.8.0"
+    "node": ">= 0.10.0"
   },
   "dependencies": {
   },
   "devDependencies": {
-    "grunt": ">=0.4.0",
-    "grunt-contrib-jshint": ">=0.2.0",
-    "grunt-contrib-nodeunit": ">=0.1.2"
+    "grunt-contrib-jshint": ">= 0.6.4",
+    "grunt-contrib-nodeunit": ">= 0.2.1",
+    "grunt-contrib-watch": ">= 0.5.3",
+    "coffee-script": ">= 1.6.3"
   },
   "peerDependencies": {
-    "grunt": ">=0.4.0"
+    "grunt": ">=0.4.1"
   },
   "scripts": {
     "test": "grunt nodeunit"
