@@ -42,7 +42,7 @@ module.exports = function(grunt) {
     // grunt-develop
     develop: {
       server: {
-        file: 'test/fixtures/app.js'
+        file: 'test/app.js'
       }
     },
     // grunt-contrib-watch
