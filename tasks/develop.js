@@ -18,7 +18,7 @@ module.exports = function(grunt) {
   // kills child process (server)
   grunt.event.on('develop.kill', function() {
     grunt.log.warn('kill process');
-    child.kill('SIGHUP');
+    child.kill('SIGKILL');
   });
 
   // spawned, notify grunt to move onto next task
@@ -49,7 +49,7 @@ module.exports = function(grunt) {
       } else {
         grunt.log.warn(util.format('application exited with code %s', code));
       }
-      if (signal === 'SIGHUP') {
+      if (signal === 'SIGKILL') {
         grunt.event.emit('develop.start', filename, nodeArgs, args, env, cmd);
       }
     })
