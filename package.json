@@ -9,7 +9,8 @@
     { "name": "Oliver Joseph Ash","email": "oliverjash@icloud.com" },
     { "name": "Jean Lauliac","email": "jean@lauliac.com" },
     { "name": "Cagdas Bayram","email": "cagdasb@gmail.com" },
-    { "name": "Adam Draper","email": "https://github.com/adamwdraper" }
+    { "name": "Adam Draper","email": "https://github.com/adamwdraper" },
+    { "name": "Luan Muniz", "email": "luan@luanmuniz.com.br" }
   ],
   "repository":{
     "type":"git",
