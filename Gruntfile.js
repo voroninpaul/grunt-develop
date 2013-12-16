@@ -25,24 +25,24 @@ module.exports = function(grunt) {
         '<%= nodeunit.tests %>'
       ],
       options: {
-        "laxcomma":true,
-        "curly": true,
-        "eqeqeq": true,
-        "immed": true,
-        "latedef": true,
-        "newcap": true,
-        "noarg": true,
-        "sub": true,
-        "undef": true,
-        "boss": true,
-        "eqnull": true,
-        "node": true
+        'laxcomma':true,
+        'curly': true,
+        'eqeqeq': true,
+        'immed': true,
+        'latedef': true,
+        'newcap': true,
+        'noarg': true,
+        'sub': true,
+        'undef': true,
+        'boss': true,
+        'eqnull': true,
+        'node': true
       }
     },
     // grunt-develop
     develop: {
       server: {
-        file: 'test/fixtures/app.js'
+        file: 'test/app.js'
       }
     },
     // grunt-contrib-watch
