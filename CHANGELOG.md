@@ -1,4 +1,16 @@
 
+0.3.0 / 2013-12-16 
+==================
+
+ * [contrib] add @luanmuniz
+ * Merge pull request #20 from luanmuniz/master
+ * Change SIGHUP to SIGKILL for windows support
+ * Fix jshint and add Global done
+ * Fix test path
+ * singlequote please
+ * Not using coffee now
+ * Add use strict
+
 0.2.3 / 2013-10-11 
 ==================
 
