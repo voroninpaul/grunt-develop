@@ -34,7 +34,10 @@ module.exports = function(grunt) {
     if (running) {
       return grunt.event.emit('develop.kill');
     }
-    child = grunt.util.spawn({
+
+
+
+      child = grunt.util.spawn({
       cmd: cmd,
       args: spawnArgs,
       opts: {
@@ -52,14 +55,19 @@ module.exports = function(grunt) {
       if (signal === 'SIGKILL') {
         grunt.event.emit('develop.start', filename, nodeArgs, args, env, cmd);
       }
-    })
-    .stdout.on('data', function(buffer) {
+    });
+    child.stdout.on('data', function(buffer) {
       grunt.log.write('\r\n[grunt-develop] > '.cyan + String(buffer));
+    });
+    child.stderr.on('data', function(buffer) {
+      grunt.log.error('\r\n[grunt-develop] > '.cyan + String(buffer));
     });
     running = true;
     grunt.log.write('\r\n[grunt-develop] > '.cyan + util.format('started application "%s".', filename));
     grunt.event.emit('develop.started');
   });
+
+
 
   // TASK. perform setup
   grunt.registerMultiTask('develop', 'init', function() {
